@@ -144,19 +144,91 @@ summary{cursor:pointer;padding:12px 14px;font-weight:800;color:var(--forest);fon
  .topinner{align-items:flex-start}
 }
 @media(max-width:520px){
- .shell{padding:13px}
- .main{padding:15px}
- .sidebar{grid-template-columns:1fr}
- .sidebar h2,.sidebar-sep,.stats,
+ /* Compact phone header */
+ .topinner{
+   display:block;
+   padding:15px 16px 14px;
+ }
+ .topinner > div:first-child{width:100%}
+ .sitebrand{font-size:14px}
+ .examtitle{
+   font-size:24px;
+   line-height:1.12;
+   margin-top:3px;
+ }
+ .exammeta{display:none}
+ .topinner > div:last-child{
+   display:flex !important;
+   flex-direction:row !important;
+   align-items:center !important;
+   justify-content:space-between;
+   gap:10px !important;
+   margin-top:11px;
+   width:100%;
+ }
+ .version{
+   font-size:13px;
+   padding:6px 9px;
+ }
+ .textsize{
+   gap:5px !important;
+   margin-left:auto;
+ }
+ .textsize > span{display:none}
+ .textsize button{
+   padding:6px 8px !important;
+   min-width:42px;
+ }
+
+ /* Use the full phone width without crowding */
+ .shell{padding:10px 10px 24px}
+ .main{padding:14px}
+ .layout{gap:10px}
+
+ /* Compact study navigation: two columns, labels only */
+ .sidebar{
+   grid-template-columns:repeat(2,minmax(0,1fr));
+   gap:7px;
+   padding:10px;
+   border-radius:13px;
+ }
+ .sidebar h2{display:none}
+ .navbtn{
+   min-height:48px;
+   margin:0;
+   padding:9px 10px;
+   font-size:15px;
+   line-height:1.2;
+   text-align:center;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+ }
+ .navsub{display:none}
+
+ /* Progress is already shown on the dashboard; remove duplicate phone clutter */
+ .sidebar-sep,
+ .sidebar .stats,
  .sidebar > div[style*="Mastery estimate"],
  .sidebar > .progress,
  .sidebar > #resetProgress,
- .sidebar > div[style*="Progress stays"]{grid-column:1}
+ .sidebar > div[style*="Progress stays"]{display:none !important}
+
+ /* Avoid presenting the same mode choices twice on the dashboard */
+ .modegrid{display:none}
+
+ .lead{font-size:15px;line-height:1.45}
+ .callout{padding:10px 11px;margin:12px 0;font-size:15px;line-height:1.45}
+ h1{font-size:26px;line-height:1.15}
+ h2{font-size:21px}
+ h3{font-size:18px}
+
  .filters{grid-template-columns:1fr}
- .modegrid{grid-template-columns:1fr}
  .summarygrid{grid-template-columns:1fr 1fr}
- .examtitle{font-size:21px}
- .stem{font-size:18px}
+ .stem{font-size:20px}
+ .choice{font-size:16px;padding:12px}
+ .masterytable td{font-size:14px;padding:9px 4px}
+ .masterytable td:first-child{width:48%}
 }
 @media print{
  .sidebar,.actions,.topbar,.modegrid,.filters{display:none!important}
@@ -383,7 +455,7 @@ function domainStats(domain){
  return {seen,count:arr.length,acc:attempts?Math.round(correct/attempts*100):null,mastery:Math.round(mastery/arr.length)};
 }
 function renderDashboard(){
- document.getElementById("bankCount").textContent=QUESTIONS.length+" questions • v18";
+ document.getElementById("bankCount").textContent=QUESTIONS.length+" questions • v19";
  const df=document.getElementById("domainFilter");
  if(df.options.length===1) DOMAIN_ORDER.forEach(d=>{const o=document.createElement("option");o.value=d;o.textContent=d;df.appendChild(o);});
  const tbl=document.getElementById("masteryTable");tbl.innerHTML="";
