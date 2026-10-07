@@ -40,6 +40,7 @@ header.topbar{
 .layout{display:grid;grid-template-columns:270px 1fr;gap:18px}
 .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
 .sidebar{padding:14px;position:sticky;top:12px;align-self:start}
+.mobile-mode{display:none}
 .sidebar h2{font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:8px 8px}
 .navbtn{width:100%;border:1px solid transparent;background:transparent;color:var(--forest);border-radius:10px;padding:12px 12px;text-align:left;cursor:pointer;margin:3px 0;font-size:16px}
 .navbtn:hover{background:var(--sage2)}
@@ -147,14 +148,14 @@ summary{cursor:pointer;padding:12px 14px;font-weight:800;color:var(--forest);fon
  /* Compact phone header */
  .topinner{
    display:block;
-   padding:15px 16px 14px;
+   padding:14px 14px 12px;
  }
- .topinner > div:first-child{width:100%}
- .sitebrand{font-size:14px}
+ .sitebrand{display:none}
  .examtitle{
-   font-size:24px;
+   font-size:22px;
    line-height:1.12;
-   margin-top:3px;
+   margin:0;
+   white-space:nowrap;
  }
  .exammeta{display:none}
  .topinner > div:last-child{
@@ -162,51 +163,57 @@ summary{cursor:pointer;padding:12px 14px;font-weight:800;color:var(--forest);fon
    flex-direction:row !important;
    align-items:center !important;
    justify-content:space-between;
-   gap:10px !important;
-   margin-top:11px;
+   gap:8px !important;
+   margin-top:10px;
    width:100%;
  }
  .version{
-   font-size:13px;
-   padding:6px 9px;
+   font-size:12px;
+   padding:5px 8px;
  }
  .textsize{
-   gap:5px !important;
+   gap:4px !important;
    margin-left:auto;
  }
  .textsize > span{display:none}
  .textsize button{
-   padding:6px 8px !important;
-   min-width:42px;
+   padding:5px 7px !important;
+   min-width:38px;
+   font-size:15px !important;
  }
+ .textsize #textLargest{font-size:17px !important}
 
- /* Use the full phone width without crowding */
- .shell{padding:10px 10px 24px}
- .main{padding:14px}
- .layout{gap:10px}
+ /* Full phone width, less card-on-card clutter */
+ .shell{padding:9px 9px 22px}
+ .main{padding:13px}
+ .layout{gap:9px}
 
- /* Compact study navigation: two columns, labels only */
+ /* Replace six visible mode buttons with one clear selector */
  .sidebar{
-   grid-template-columns:repeat(2,minmax(0,1fr));
-   gap:7px;
-   padding:10px;
+   display:block;
+   padding:11px;
    border-radius:13px;
  }
- .sidebar h2{display:none}
- .navbtn{
-   min-height:48px;
-   margin:0;
-   padding:9px 10px;
-   font-size:15px;
-   line-height:1.2;
-   text-align:center;
-   display:flex;
-   align-items:center;
-   justify-content:center;
+ .mobile-mode{display:block}
+ .mobile-mode label{
+   display:block;
+   margin:0 0 6px 2px;
+   color:var(--forest);
+   font-size:14px;
+   font-weight:800;
  }
- .navsub{display:none}
-
- /* Progress is already shown on the dashboard; remove duplicate phone clutter */
+ .mobile-mode select{
+   width:100%;
+   padding:11px 12px;
+   border:1px solid #b9c3ba;
+   border-radius:10px;
+   background:white;
+   color:var(--forest);
+   font-size:16px;
+   font-weight:700;
+ }
+ .sidebar h2,
+ .sidebar .navbtn,
  .sidebar-sep,
  .sidebar .stats,
  .sidebar > div[style*="Mastery estimate"],
@@ -214,14 +221,15 @@ summary{cursor:pointer;padding:12px 14px;font-weight:800;color:var(--forest);fon
  .sidebar > #resetProgress,
  .sidebar > div[style*="Progress stays"]{display:none !important}
 
- /* Avoid presenting the same mode choices twice on the dashboard */
+ /* Avoid duplicate mode choices on dashboard */
  .modegrid{display:none}
 
- .lead{font-size:15px;line-height:1.45}
- .callout{padding:10px 11px;margin:12px 0;font-size:15px;line-height:1.45}
- h1{font-size:26px;line-height:1.15}
+ /* Trim explanatory text without removing high-value content */
+ .lead{display:none}
+ h1{font-size:24px;line-height:1.15;margin-bottom:10px}
  h2{font-size:21px}
  h3{font-size:18px}
+ .callout{padding:10px 11px;margin:10px 0 13px;font-size:14px;line-height:1.45}
 
  .filters{grid-template-columns:1fr}
  .summarygrid{grid-template-columns:1fr 1fr}
@@ -288,6 +296,17 @@ body.text-xl .counter{font-size:17px}
 <div class="shell">
  <div class="layout">
   <aside class="card sidebar">
+   <div class="mobile-mode">
+    <label for="mobileModeSelect">Study mode</label>
+    <select id="mobileModeSelect" aria-label="Study mode">
+     <option value="dashboard">Dashboard</option>
+     <option value="adaptive">Mastery Drill</option>
+     <option value="rapid">Rapid Discrimination</option>
+     <option value="trap">Instructor Traps</option>
+     <option value="missed">Needs Review</option>
+     <option value="exam">25-Question Simulation</option>
+    </select>
+   </div>
    <h2>Study</h2>
    <button class="navbtn active" data-mode="dashboard">Dashboard</button>
    <button class="navbtn" data-mode="adaptive">Mastery Drill<span class="navsub">Adaptive clinical questions</span></button>
@@ -455,7 +474,7 @@ function domainStats(domain){
  return {seen,count:arr.length,acc:attempts?Math.round(correct/attempts*100):null,mastery:Math.round(mastery/arr.length)};
 }
 function renderDashboard(){
- document.getElementById("bankCount").textContent=QUESTIONS.length+" questions • v19";
+ document.getElementById("bankCount").textContent=QUESTIONS.length+" questions • v21";
  const df=document.getElementById("domainFilter");
  if(df.options.length===1) DOMAIN_ORDER.forEach(d=>{const o=document.createElement("option");o.value=d;o.textContent=d;df.appendChild(o);});
  const tbl=document.getElementById("masteryTable");tbl.innerHTML="";
@@ -521,6 +540,8 @@ function hideAll(){
 }
 function setActiveNav(mode){
  document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));
+ const mobile=document.getElementById("mobileModeSelect");
+ if(mobile) mobile.value=mode;
 }
 function startSession(mode){
  stopTimer(); currentMode=mode; sessionResults=[]; examSelections=[]; currentIndex=0;
@@ -630,6 +651,7 @@ function renderExamReview(){
 function showDashboard(){stopTimer();hideAll();document.getElementById("dashboard").style.display="block";setActiveNav("dashboard");renderDashboard();}
 document.querySelectorAll(".modecard").forEach(c=>c.onclick=()=>startSession(c.dataset.startmode));
 document.querySelectorAll(".navbtn").forEach(b=>b.onclick=()=>{if(b.dataset.mode==="dashboard")showDashboard();else startSession(b.dataset.mode);});
+document.getElementById("mobileModeSelect").onchange=e=>{const mode=e.target.value;if(mode==="dashboard")showDashboard();else startSession(mode);};
 document.getElementById("submitBtn").onclick=checkAnswer;document.getElementById("nextBtn").onclick=nextQuestion;document.getElementById("harderBtn").onclick=harder;
 document.querySelectorAll(".confbtn").forEach(b=>b.onclick=()=>setConfidence(b.dataset.conf,b));
 document.getElementById("backDashboard").onclick=showDashboard;document.getElementById("reviewMissedBtn").onclick=renderExamReview;
