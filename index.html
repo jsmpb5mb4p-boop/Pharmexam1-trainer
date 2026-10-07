@@ -40,7 +40,6 @@ header.topbar{
 .layout{display:grid;grid-template-columns:270px 1fr;gap:18px}
 .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
 .sidebar{padding:14px;position:sticky;top:12px;align-self:start}
-.mobile-mode{display:none}
 .sidebar h2{font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:8px 8px}
 .navbtn{width:100%;border:1px solid transparent;background:transparent;color:var(--forest);border-radius:10px;padding:12px 12px;text-align:left;cursor:pointer;margin:3px 0;font-size:16px}
 .navbtn:hover{background:var(--sage2)}
@@ -145,18 +144,9 @@ summary{cursor:pointer;padding:12px 14px;font-weight:800;color:var(--forest);fon
  .topinner{align-items:flex-start}
 }
 @media(max-width:520px){
- /* Compact phone header */
- .topinner{
-   display:block;
-   padding:14px 14px 12px;
- }
+ .topinner{display:block;padding:14px 14px 12px}
  .sitebrand{display:none}
- .examtitle{
-   font-size:22px;
-   line-height:1.12;
-   margin:0;
-   white-space:nowrap;
- }
+ .examtitle{font-size:22px;line-height:1.12;margin:0;white-space:nowrap}
  .exammeta{display:none}
  .topinner > div:last-child{
    display:flex !important;
@@ -167,76 +157,57 @@ summary{cursor:pointer;padding:12px 14px;font-weight:800;color:var(--forest);fon
    margin-top:10px;
    width:100%;
  }
- .version{
-   font-size:12px;
-   padding:5px 8px;
- }
- .textsize{
-   gap:4px !important;
-   margin-left:auto;
- }
+ .version{font-size:12px;padding:5px 8px}
+ .textsize{gap:4px !important;margin-left:auto}
  .textsize > span{display:none}
- .textsize button{
-   padding:5px 7px !important;
-   min-width:38px;
-   font-size:15px !important;
- }
+ .textsize button{padding:5px 7px !important;min-width:38px;font-size:15px !important}
  .textsize #textLargest{font-size:17px !important}
 
- /* Full phone width, less card-on-card clutter */
  .shell{padding:9px 9px 22px}
- .main{padding:13px}
- .layout{gap:9px}
+ .main{padding:12px}
+ .layout{gap:0}
+ .sidebar{display:none}
 
- /* Replace six visible mode buttons with one clear selector */
- .sidebar{
-   display:block;
-   padding:11px;
-   border-radius:13px;
- }
- .mobile-mode{display:block}
- .mobile-mode label{
-   display:block;
-   margin:0 0 6px 2px;
-   color:var(--forest);
-   font-size:14px;
-   font-weight:800;
- }
- .mobile-mode select{
-   width:100%;
-   padding:11px 12px;
-   border:1px solid #b9c3ba;
-   border-radius:10px;
+ .modegrid{display:grid;grid-template-columns:1fr;gap:9px;margin:0 0 11px}
+ .modecard{
+   min-height:64px;
+   padding:13px 42px 13px 14px;
+   border:1px solid #aebba9;
+   border-radius:12px;
    background:white;
-   color:var(--forest);
-   font-size:16px;
-   font-weight:700;
+   box-shadow:0 2px 7px rgba(36,55,53,.07);
  }
- .sidebar h2,
- .sidebar .navbtn,
- .sidebar-sep,
- .sidebar .stats,
- .sidebar > div[style*="Mastery estimate"],
- .sidebar > .progress,
- .sidebar > #resetProgress,
- .sidebar > div[style*="Progress stays"]{display:none !important}
+ .modecard strong{font-size:17px;margin:0}
+ .modecard p{display:none}
+ .modecard::after{right:15px;font-size:27px;opacity:.68}
+ .modecard.examstart{grid-column:auto}
 
- /* Avoid duplicate mode choices on dashboard */
- .modegrid{display:none}
+ details{margin:8px 0}
+ summary{padding:11px 12px;font-size:15px}
+ .detailsbody{font-size:14px;padding:0 12px 12px}
+ .filters{grid-template-columns:1fr}
+ .filters label{font-size:13px}
+ .filters select{font-size:15px;padding:9px}
 
- /* Trim explanatory text without removing high-value content */
- .lead{display:none}
- h1{font-size:24px;line-height:1.15;margin-bottom:10px}
+ h1{font-size:24px;line-height:1.15}
  h2{font-size:21px}
  h3{font-size:18px}
- .callout{padding:10px 11px;margin:10px 0 13px;font-size:14px;line-height:1.45}
-
- .filters{grid-template-columns:1fr}
  .summarygrid{grid-template-columns:1fr 1fr}
  .stem{font-size:20px}
  .choice{font-size:16px;padding:12px}
  .masterytable td{font-size:14px;padding:9px 4px}
  .masterytable td:first-child{width:48%}
+
+ .mobile-return{
+   display:inline-block;
+   border:0;
+   background:transparent;
+   color:var(--forest);
+   font-weight:800;
+   padding:0 0 10px;
+   cursor:pointer;
+ }
+ .footer{font-size:12px;line-height:1.4;padding:0 6px}
 }
 @media print{
  .sidebar,.actions,.topbar,.modegrid,.filters{display:none!important}
@@ -271,6 +242,32 @@ body.text-xl .filters select{font-size:18px}
 body.text-xl .badge{font-size:15px}
 body.text-xl .counter{font-size:17px}
 
+
+.dashboard-details{margin:10px 0}
+.dashboard-details summary{background:var(--sage2);border-radius:10px}
+.modecard{
+ position:relative;
+ border:1px solid #aebba9;
+ background:#fff;
+ box-shadow:0 3px 9px rgba(36,55,53,.07);
+ min-height:108px;
+}
+.modecard::after{
+ content:"›";
+ position:absolute;
+ right:14px;
+ top:50%;
+ transform:translateY(-50%);
+ font-size:28px;
+ color:var(--forest2);
+ opacity:.58;
+}
+.modecard strong{font-size:19px;padding-right:24px}
+.modecard p{padding-right:24px}
+.modecard.examstart{grid-column:1/-1}
+.mobile-return{display:none}
+.questionarea{scroll-margin-top:10px}
+
 </style>
 </head>
 <body>
@@ -296,17 +293,6 @@ body.text-xl .counter{font-size:17px}
 <div class="shell">
  <div class="layout">
   <aside class="card sidebar">
-   <div class="mobile-mode">
-    <label for="mobileModeSelect">Study mode</label>
-    <select id="mobileModeSelect" aria-label="Study mode">
-     <option value="dashboard">Dashboard</option>
-     <option value="adaptive">Mastery Drill</option>
-     <option value="rapid">Rapid Discrimination</option>
-     <option value="trap">Instructor Traps</option>
-     <option value="missed">Needs Review</option>
-     <option value="exam">25-Question Simulation</option>
-    </select>
-   </div>
    <h2>Study</h2>
    <button class="navbtn active" data-mode="dashboard">Dashboard</button>
    <button class="navbtn" data-mode="adaptive">Mastery Drill<span class="navsub">Adaptive clinical questions</span></button>
@@ -323,33 +309,37 @@ body.text-xl .counter{font-size:17px}
    <div style="font-size:14px;color:var(--muted);margin-left:4px">Mastery estimate</div>
    <div class="progress"><span id="overallBar"></span></div>
    <button class="ghost" id="resetProgress">Reset saved progress</button>
-   <div style="font-size:14px;color:var(--muted);margin:9px 4px 0">Progress stays in this browser only.</div>
   </aside>
 
   <main class="card main">
    <section id="dashboard">
-    <h1>Study what the exam is actually likely to ask.</h1>
-    <p class="lead">Built from the narrated Exam 1 review, the first three 25-question quizzes, and course sources. When course wording and current clinical interpretation differ, the distinction is shown in the rationale rather than hidden.</p>
-
-    <div class="callout rust"><b>Explicit instructor flags:</b> check inhaler technique before asthma escalation; know Pseudomonas coverage, especially that ertapenem does not cover it; and know that <b>oral phenylephrine (Sudafed PE) is ineffective and should not be recommended</b>. Pseudoephedrine (Sudafed) is the effective oral alternative when appropriate.</div>
-
     <div class="modegrid">
-     <button class="modecard" data-startmode="adaptive"><span class="tag">Recommended</span><strong>Mastery Drill</strong><p>Weights unseen, missed, guessed, and low-mastery concepts more heavily.</p></button>
-     <button class="modecard" data-startmode="rapid"><span class="tag">Fast recall</span><strong>Rapid Discrimination</strong><p>Short distinctions designed for 10–20 second decisions.</p></button>
-     <button class="modecard" data-startmode="trap"><span class="tag">High yield</span><strong>Instructor Traps</strong><p>Explicit exam flags, prior misses, and course-vs-clinical distinctions.</p></button>
-     <button class="modecard" data-startmode="exam"><span class="tag">Exam conditions</span><strong>25-Question Simulation</strong><p>Balanced across Weeks 1–3. No rationale or correctness feedback until the end.</p></button>
+     <button class="modecard" data-startmode="adaptive"><strong>Mastery Drill</strong><p>Adaptive practice that prioritizes material you have not mastered yet.</p></button>
+     <button class="modecard" data-startmode="rapid"><strong>Rapid Discrimination</strong><p>Fast high-yield distinctions and recognition.</p></button>
+     <button class="modecard" data-startmode="trap"><strong>Instructor Traps</strong><p>High-yield exam flags and easy-to-miss distinctions.</p></button>
+     <button class="modecard" data-startmode="missed"><strong>Needs Review</strong><p>Revisit concepts below 85% mastery.</p></button>
+     <button class="modecard examstart" data-startmode="exam"><strong>25-Question Simulation</strong><p>Balanced exam-style set with feedback withheld until the end.</p></button>
     </div>
 
-    <div class="filters">
-     <label>Session length<select id="sessionLength"><option>10</option><option selected>20</option><option>25</option><option value="999">All available</option></select></label>
-     <label>Week<select id="weekFilter"><option value="all">All weeks</option><option value="1">Week 1</option><option value="2">Week 2</option><option value="3">Week 3</option></select></label>
-     <label>Difficulty<select id="difficultyFilter"><option value="all">Mixed</option><option>Foundation</option><option>Application</option><option>Exam Trap</option></select></label>
-     <label>Domain<select id="domainFilter"><option value="all">All domains</option></select></label>
-     <label>Simulation timer<select id="timerSetting"><option value="0">Untimed</option><option value="25">25 min</option><option value="40">40 min</option><option value="50" selected>50 min</option></select></label>
-    </div>
+    <details class="dashboard-details">
+      <summary>Customize session</summary>
+      <div class="detailsbody">
+       <div class="filters">
+        <label>Session length<select id="sessionLength"><option>10</option><option selected>20</option><option>25</option><option value="999">All available</option></select></label>
+        <label>Week<select id="weekFilter"><option value="all">All weeks</option><option value="1">Week 1</option><option value="2">Week 2</option><option value="3">Week 3</option></select></label>
+        <label>Difficulty<select id="difficultyFilter"><option value="all">Mixed</option><option>Foundation</option><option>Application</option><option>Exam Trap</option></select></label>
+        <label>Domain<select id="domainFilter"><option value="all">All domains</option></select></label>
+        <label>Simulation timer<select id="timerSetting"><option value="0">Untimed</option><option value="25">25 min</option><option value="40">40 min</option><option value="50" selected>50 min</option></select></label>
+       </div>
+      </div>
+    </details>
 
-    <h3>Mastery by domain</h3>
-    <table class="masterytable" id="masteryTable"></table>
+    <details class="dashboard-details">
+      <summary>Mastery by domain</summary>
+      <div class="detailsbody">
+       <table class="masterytable" id="masteryTable"></table>
+      </div>
+    </details>
 
     <details>
       <summary>How scoring and adaptation work</summary>
@@ -358,7 +348,8 @@ body.text-xl .counter{font-size:17px}
         <li>Unseen questions begin at 0% mastery rather than receiving credit for material you have not practiced.</li>
         <li>Correct answers increase mastery; repeated misses, “unsure,” and “guessed” responses keep a concept in rotation.</li>
         <li>Answer choices are reshuffled each time so letter-position memory cannot substitute for content knowledge.</li>
-        <li>“Make this harder” moves directly to a linked application question when one exists.</li><li>Adaptive sessions discourage back-to-back questions from the same domain or concept so one large topic does not dominate the session.</li>
+        <li>“Make this harder” moves directly to a linked application question when one exists.</li>
+        <li>Adaptive sessions discourage back-to-back questions from the same domain or concept so one large topic does not dominate the session.</li>
        </ul>
       </div>
     </details>
@@ -368,12 +359,13 @@ body.text-xl .counter{font-size:17px}
       <div class="detailsbody">
        <b>Primary exam basis:</b> narrated instructor Exam 1 review and the first three course quizzes.<br><br>
        <b>Accuracy checks:</b> Pharmacotherapy Principles and Practice, 7th ed.; Pharmacotherapeutics for Advanced Practice; course immunization readings; and GINA materials in the course library.<br><br>
-       Question-bank QA also removes answer-length cues, implausible distractors, and near-duplicate items. Gold “clinical nuance” notes are used when course wording is simplified, older, or likely to be tested differently from current practice. Examples include Fluad vs Fluzone High-Dose, live-vaccine household contacts, cephalosporin cross-reactivity, GINA 2025 vs 2026 pediatric asthma, pyelonephritis duration, and oral phenylephrine.
+       Question-bank QA also removes answer-length cues, implausible distractors, and near-duplicate items.
       </div>
     </details>
    </section>
 
    <section class="questionarea" id="questionarea">
+    <button class="mobile-return" id="questionHomeBtn" type="button">← Study modes</button>
     <div class="qhead">
       <div class="badges" id="qmeta"></div>
       <div class="counter"><span id="timer" class="timer" style="display:none"></span> <span id="qcounter"></span></div>
@@ -428,7 +420,7 @@ body.text-xl .counter{font-size:17px}
    </section>
   </main>
  </div>
- <div class="footer">YourDNP.com • Educational study tool • Course-specific exam preparation</div>
+ <div class="footer">YourDNP.com • Educational study tool • Course-specific exam preparation • Progress is saved only in this browser.</div>
 </div>
 
 <script>
@@ -474,7 +466,7 @@ function domainStats(domain){
  return {seen,count:arr.length,acc:attempts?Math.round(correct/attempts*100):null,mastery:Math.round(mastery/arr.length)};
 }
 function renderDashboard(){
- document.getElementById("bankCount").textContent=QUESTIONS.length+" questions • v21";
+ document.getElementById("bankCount").textContent=QUESTIONS.length+" questions • v22";
  const df=document.getElementById("domainFilter");
  if(df.options.length===1) DOMAIN_ORDER.forEach(d=>{const o=document.createElement("option");o.value=d;o.textContent=d;df.appendChild(o);});
  const tbl=document.getElementById("masteryTable");tbl.innerHTML="";
@@ -540,8 +532,6 @@ function hideAll(){
 }
 function setActiveNav(mode){
  document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));
- const mobile=document.getElementById("mobileModeSelect");
- if(mobile) mobile.value=mode;
 }
 function startSession(mode){
  stopTimer(); currentMode=mode; sessionResults=[]; examSelections=[]; currentIndex=0;
@@ -576,6 +566,7 @@ function renderQuestion(){
  document.getElementById("nextBtn").style.display="none";document.getElementById("submitBtn").style.display="inline-block";
  document.getElementById("submitBtn").textContent=currentMode==="exam"?(currentIndex===session.length-1?"Finish simulation":"Save answer & next"):"Check answer";
  document.querySelectorAll(".confbtn").forEach(b=>b.classList.remove("active"));
+ setTimeout(()=>document.getElementById("questionarea").scrollIntoView({behavior:"smooth",block:"start"}),0);
 }
 function selectChoice(i){if(answered)return;selected=i;document.querySelectorAll(".choice").forEach((e,j)=>e.classList.toggle("selected",j===i));}
 function recordProgress(q,isCorrect){const r=rec(q.id);r.seen++;if(isCorrect)r.correct++;else r.wrong++;save();}
@@ -651,10 +642,10 @@ function renderExamReview(){
 function showDashboard(){stopTimer();hideAll();document.getElementById("dashboard").style.display="block";setActiveNav("dashboard");renderDashboard();}
 document.querySelectorAll(".modecard").forEach(c=>c.onclick=()=>startSession(c.dataset.startmode));
 document.querySelectorAll(".navbtn").forEach(b=>b.onclick=()=>{if(b.dataset.mode==="dashboard")showDashboard();else startSession(b.dataset.mode);});
-document.getElementById("mobileModeSelect").onchange=e=>{const mode=e.target.value;if(mode==="dashboard")showDashboard();else startSession(mode);};
 document.getElementById("submitBtn").onclick=checkAnswer;document.getElementById("nextBtn").onclick=nextQuestion;document.getElementById("harderBtn").onclick=harder;
 document.querySelectorAll(".confbtn").forEach(b=>b.onclick=()=>setConfidence(b.dataset.conf,b));
 document.getElementById("backDashboard").onclick=showDashboard;document.getElementById("reviewMissedBtn").onclick=renderExamReview;
+document.getElementById("questionHomeBtn").onclick=showDashboard;
 document.getElementById("weakAreaBtn").onclick=()=>{if(!weakestDomain)return;showDashboard();document.getElementById("domainFilter").value=weakestDomain;startSession("adaptive");};
 document.getElementById("reviewBack").onclick=()=>{hideAll();document.getElementById("summary").style.display="block";};
 document.getElementById("resetProgress").onclick=()=>{if(confirm("Reset all saved progress for this trainer?")){progress={};save();renderDashboard();}};
