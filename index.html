@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="light dark">
 <title>YourDNP • 536 Exam 1 Study</title>
 <style>
 :root{
@@ -253,6 +253,100 @@ body.text-xl .counter{font-size:17px}
 .modecard.examstart{grid-column:1/-1}
 .mobile-return{display:none}
 .questionarea{scroll-margin-top:10px}
+
+
+
+/* YourDNP PharmExam1 appearance bridge v1.0. Scope strictly to Dark, screen only. */
+@media screen {
+html[data-ydnp-embedded-theme="dark"]{
+  color-scheme:dark;
+  --forest:#a2e7b8;--forest2:#89d8a4;--rust:#e4aa7b;
+  --sage:#2c4535;--sage2:#2d4234;--cream:#131b16;--paper:#26372c;
+  --gold:#4d3f25;--rose:#4b2b2a;--blue:#294452;
+  --line:#54705b;--text:#f2f6f2;--muted:#bccbbf;
+  --good:#a2e7b8;--bad:#ffc0b4;
+  --shadow:0 5px 16px rgba(0,0,0,.25);
+}
+html[data-ydnp-embedded-theme="dark"] body{
+  background:var(--cream);color:var(--text);
+}
+html[data-ydnp-embedded-theme="dark"] header.topbar{
+  background:#203528;color:#f2f6f2;border-bottom-color:#89d8a4;
+}
+html[data-ydnp-embedded-theme="dark"] :is(h1,h2,h3,.modecard strong,.stat b,.summarycard b,.feedbacktitle){
+  color:var(--text);
+}
+html[data-ydnp-embedded-theme="dark"] :is(.lead,.detailsbody,.stem,.counter,.filters label){
+  color:var(--text);
+}
+html[data-ydnp-embedded-theme="dark"] :is(.card,.stat,.modecard,.choice,details,.summarycard,.reviewitem,.dist li){
+  background:#26372c;color:var(--text);border-color:var(--line);
+}
+html[data-ydnp-embedded-theme="dark"] :is(.sidebar,.main){
+  background:#26372c;
+}
+html[data-ydnp-embedded-theme="dark"] :is(.modecard:hover,.modecard:focus-visible,.choice:hover,.choice:focus-visible){
+  background:#304738;border-color:#a2e7b8;
+}
+html[data-ydnp-embedded-theme="dark"] .choice.selected{
+  background:#304d3a;border-color:#a2e7b8;
+}
+html[data-ydnp-embedded-theme="dark"] .choice.correct{
+  background:#224132;border-color:#a2e7b8;
+}
+html[data-ydnp-embedded-theme="dark"] .choice.wrong{
+  background:#4b2b2a;border-color:#ffc0b4;
+}
+html[data-ydnp-embedded-theme="dark"] .letter{
+  background:#304738;color:var(--text);
+}
+html[data-ydnp-embedded-theme="dark"] :is(.badge,.kbd){
+  background:#304738;border-color:#54705b;color:var(--text);
+}
+html[data-ydnp-embedded-theme="dark"] .badge.high{background:#4b2b2a;color:#ffc0b4}
+html[data-ydnp-embedded-theme="dark"] .badge.exam{background:#4d3f25;color:#f7d892}
+html[data-ydnp-embedded-theme="dark"] :is(.navbtn,.ghost,.secondary,.confbtn,.textsize button){
+  background:#304738;color:var(--text);border-color:#76977d;
+}
+html[data-ydnp-embedded-theme="dark"] :is(.navbtn:hover,.navbtn.active,.ghost:hover,.secondary:hover,.confbtn.active){
+  background:#365340;color:var(--text);border-color:#a2e7b8;
+}
+html[data-ydnp-embedded-theme="dark"] :is(.primary,.next){
+  background:#246d49;color:#fff;border:1px solid #398b61;
+}
+html[data-ydnp-embedded-theme="dark"] :is(.primary:hover,.next:hover){
+  background:#2a7b53;
+}
+html[data-ydnp-embedded-theme="dark"] .hard{
+  background:#4d3f25;color:#f7d892;border:1px solid #897449;
+}
+html[data-ydnp-embedded-theme="dark"] .modecard .tag{background:#365340;color:#a2e7b8}
+html[data-ydnp-embedded-theme="dark"] :is(.callout,.feedbackbox){
+  background:#224132;color:var(--text);border-left-color:#a2e7b8;
+}
+html[data-ydnp-embedded-theme="dark"] :is(.callout.rust,.feedbackbox.wrong){
+  background:#4b2b2a;color:var(--text);border-left-color:#ffc0b4;
+}
+html[data-ydnp-embedded-theme="dark"] .callout.gold,
+html[data-ydnp-embedded-theme="dark"] .sourcebox{
+  background:#4d3f25;color:#f7d892;border-color:#897449;
+}
+html[data-ydnp-embedded-theme="dark"] :is(.callout b,.reviewitem .correctans){color:#a2e7b8}
+html[data-ydnp-embedded-theme="dark"] .reviewitem .wrongans{color:#ffc0b4}
+html[data-ydnp-embedded-theme="dark"] :is(.progress,.masterybar){background:#3b5242}
+html[data-ydnp-embedded-theme="dark"] :is(.progress span,.masterybar span){background:#89d8a4}
+html[data-ydnp-embedded-theme="dark"] :is(.filters select,select,input:not([type=checkbox]):not([type=radio])){
+  background:#202e26;color:var(--text);border-color:#698672;
+}
+html[data-ydnp-embedded-theme="dark"] :is(summary,.navbtn,a){color:#a2e7b8}
+html[data-ydnp-embedded-theme="dark"] .masterytable td{border-bottom-color:#54705b}
+html[data-ydnp-embedded-theme="dark"] :is(.choice,.modecard,.navbtn,.primary,.next,.secondary,.ghost,button,summary,select,input):focus-visible{
+  outline:3px solid #a2edbe;outline-offset:3px;
+}
+html[data-ydnp-embedded-theme="dark"] :is(.footer,.navsub,.stat span,.modecard p,.summarycard span){
+  color:var(--muted);
+}
+}
 
 </style>
 </head>
@@ -644,5 +738,30 @@ applyTextSize(localStorage.getItem("yourdnp_exam1_text_size")||"normal");
 
 renderDashboard();
 </script>
+
+<script>
+/* The GitHub Pages iframe cannot inherit WordPress's html[data-ydnp-theme].
+   A trusted message from the YourDNP parent switches colors without reloading
+   the practice session or changing any saved-progress keys. */
+(function(){
+  const root=document.documentElement;
+  const query=new URLSearchParams(window.location.search);
+  const explicit=query.get('ydnpTheme');
+  const media=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)'):null;
+  function apply(theme){if(theme==='dark'||theme==='light')root.setAttribute('data-ydnp-embedded-theme',theme);}
+  if(explicit==='dark'||explicit==='light')apply(explicit);
+  else apply(media&&media.matches?'dark':'light');
+  if(media){
+    const sync=function(ev){if(explicit!=='dark'&&explicit!=='light'&&!window.frameElement)apply(ev.matches?'dark':'light');};
+    if(media.addEventListener)media.addEventListener('change',sync);
+  }
+  window.addEventListener('message',function(ev){
+    if(ev.origin!=='https://yourdnp.com')return;
+    if(!ev.data||ev.data.type!=='yourdnp:appearance')return;
+    apply(ev.data.theme);
+  });
+})();
+</script>
+
 </body>
 </html>
